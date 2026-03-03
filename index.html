@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Apple Market — Каталог iPhone</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#000 0%,#0a0a0a 100%);
+  color:#fff;
+}
+
+header{
+  text-align:center;
+  padding:40px 20px;
+  background:#000;
+  border-bottom:1px solid #111;
+}
+
+header h1{
+  font-size:32px;
+  margin:0;
+}
+
+header p{
+  color:#888;
+  margin-top:10px;
+}
+
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+
+.filter{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.filter button{
+  background:#111;
+  border:1px solid #222;
+  color:#fff;
+  padding:8px 14px;
+  margin:4px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.filter button:hover{
+  background:#2ecc71;
+  color:#000;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px;
+}
+
+
+.card{
+  background:#111;
+  border:1px solid #1f1f1f;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  transition:.3s ease;
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  border-radius:10px;
+}
+
+.title{
+  font-size:18px;
+  font-weight:600;
+  margin:12px 0;
+}
+
+.price{
+  font-size:20px;
+  font-weight:700;
+  color:#2ecc71;
+  margin:10px 0;
+}
+
+.actions{
+  margin-top:12px;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.order{
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+  display:inline-block;
+}
+
+.order.consult{
+  background:#fff;
+  color:#000;
+}
+
+.order.buy{
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:#fff;
+}
+
+.order:hover{
+  transform:scale(1.05);
+  opacity:.9;
+}
+
+.details{
+  display:none;
+  font-size:14px;
+  margin-top:10px;
+  text-align:left;
+  background:#0f0f0f;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #222;
+}
+
+.details.active{
+  display:block;
+}
+
+
+.show-btn{
+  margin-top:8px;
+  font-size:13px;
+  color:#2ecc71;
+  cursor:pointer;
+}
+
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#e74c3c;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+  border-top:1px solid #111;
+  color:#777;
+}
+
+@media(max-width:520px){
+  .card img{height:180px}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Apple Market 🍎</h1>
+  <p>Премиальный каталог iPhone</p>
+</header>
+
+<div class="wrap">
+
+
+
+<div class="grid">
+
+<!-- 13 -->
+<div class="card">
+<img src="https://gstore.ua/content/images/36/950x950l80ml0/apple-iphone-13-38144411565652.webp">
+<div class="title">iPhone 13</div>
+<div class="variant">128 GB — 900 BYN</div>
+<div class="variant">256 GB — 1050 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED 60Hz<br>📸 12+12 Мп<br>🔋 3230 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://mobilworld.by/upload/medialibrary/1e6/1e699283d6356c800c432ca33c8c1b61.png">
+<div class="title">iPhone 13 Pro</div>
+<div class="variant">128 GB — 1100 BYN</div>
+<div class="variant">256 GB — 1250 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" 120Hz<br>📸 12+12+12 Мп<br>🔋 3095 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://gstore.ua/content/images/48/950x950l80ml0/19526170304766.webp">
+<div class="title">iPhone 13 Pro Max</div>
+<div class="variant">128 GB — 1400 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.7" 120Hz<br>📸 12+12+12 Мп<br>🔋 4350 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 14 -->
+<div class="card">
+<img src="https://mcstore.com.ua/news/wp-content/uploads/2023/03/Apple-iPhone-14-color-lineup-230307_big.jpg.large_-770x513.jpg">
+<div class="title">iPhone 14</div>
+<div class="variant">128 GB — 1150 BYN</div>
+<div class="variant">256 GB — 1300 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED<br>📸 12+12 Мп<br>🔋 3280 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://appleroom.ua/wa-data/public/shop/img/iphone-14-pro-max-colors.png">
+<div class="title">iPhone 14 Pro</div>
+<div class="variant">128 GB — 1350 BYN</div>
+<div class="variant">256 GB — 1500 BYN</div>
+<div class="variant">512 GB — 1650 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" 120Hz<br>📸 48+12+12 Мп<br>🔋 3200 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://istop.ua/wp-content/uploads/2022/10/iphone-14-pro-max-finish-unselect-gallery-1-202209_geo_us-2_result-1.jpg">
+<div class="title">iPhone 14 Pro Max</div>
+<div class="variant">128 GB — 1650 BYN</div>
+<div class="variant">256 GB — 1800 BYN</div>
+<div class="variant">512 GB — 1950 BYN</div>
+<div class="variant">1 TB — 2100 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.7" 120Hz<br>📸 48+12+12 Мп<br>🔋 4325 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 15 -->
+<div class="card">
+<img src="https://estore.ua/media/post/image/a/p/apple-iphone-15-lineup-color-lineup-230912_big.jpg.large_2x_1.jpg">
+<div class="title">iPhone 15</div>
+<div class="variant">128 GB — 1400 BYN</div>
+<div class="variant">256 GB — 1550 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED<br>📸 48+12 Мп<br>🔋 3350 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone_15_pro.png">
+<div class="title">iPhone 15 Pro</div>
+<div class="variant">128 GB — 1600 BYN</div>
+<div class="variant">256 GB — 1750 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" 120Hz<br>📸 48+12+12 Мп<br>🔋 3275 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://applefun.com.ua/source/iphone-15-pro-czveta.jpg?1695284902194">
+<div class="title">iPhone 15 Pro Max</div>
+<div class="variant">256 GB — 2050 BYN</div>
+<div class="variant">512 GB — 2200 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.7" 120Hz<br>📸 48+12+12 Мп<br>🔋 4440 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 16 -->
+<div class="card">
+<img src="https://istop.ua/wp-content/uploads/2024/12/iphone-16-finish-select-202409-6-7inch_geo_us_result_result.jpg">
+<div class="title">iPhone 16</div>
+<div class="variant">128 GB — 1650 BYN</div>
+<div class="variant">256 GB — 1800 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED<br>📸 48+12 Мп<br>🔋 3560 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://frontalka.com.ua/uploads/editor_image/blog-id250-photo1.webp">
+<div class="title">iPhone 16 Pro</div>
+<div class="variant">256 GB — 2000 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48+12 Мп<br>🔋 3580 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://sumypost.com/wp-content/uploads/2024/10/iphone16-980x680.jpg">
+<div class="title">iPhone 16 Pro Max</div>
+<div class="variant">256 GB — 2200 BYN</div>
+<div class="variant">512 GB — 2400 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.9" 120Hz<br>📸 48+48+12 Мп<br>🔋 4680 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 17 -->
+<div class="card">
+<img src="https://istop.ua/wp-content/uploads/2025/09/iphone-17-finish-unselect-gallery-1-202509_geo_us_result.jpg">
+<div class="title">iPhone 17</div>
+<div class="variant">256 GB — 1980 BYN</div>
+<div class="variant">512 GB — 2135 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48 Мп<br>🔋 3690 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://istop.ua/wp-content/uploads/2025/09/iphone-air-finish-unselect-gallery-1-202509_result.jpg">
+<div class="title">iPhone 17 Air</div>
+<div class="variant">256 GB — 2480 BYN</div>
+<div class="variant">512 GB — 2650 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.6" 120Hz<br>📸 48 Мп<br>🔋 3150 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://istop.ua/wp-content/uploads/2025/09/iphone-17-pro-finish-select-202509-6-9inch_geo_us_result.jpg">
+<div class="title">iPhone 17 Pro</div>
+<div class="variant">256 GB — 2755 BYN</div>
+<div class="variant">512 GB — 2980 BYN</div>
+<div class="variant">1 TB — 3270 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48+48 Мп<br>🔋 4250 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://www.ispot.com.ua/image/cache/webp/catalog/import_files/d4/d4ef0ace7f4811f0985522024d064ca1_b8d79e038e2d11f0985522024d064ca1-700x700.webp">
+<div class="title">iPhone 17 Pro Max</div>
+<div class="variant">256 GB — 2995 BYN</div>
+<div class="variant">512 GB — 3235 BYN</div>
+<div class="variant">1 TB — 3615 BYN</div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.9" 120Hz<br>📸 48+48+48 Мп<br>🔋 5090 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+</div>
+
+<footer>
+
+<div style="margin-bottom:15px;font-size:16px;">Мы в соцсетях:</div>
+
+<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+
+<a href="https://t.me/am_market_by" target="_blank"
+   style="background:#0088cc;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;">
+   ✈️ Telegram
+</a>
+
+<a href="https://www.instagram.com/apple__market_by" target="_blank"
+   style="background:#d62976;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;">
+   📸 Instagram (розница)
+</a>
+
+<a href="https://www.instagram.com/megaplace_market" target="_blank"
+   style="background:#f56040;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;">
+   🏷️ Instagram (опт)
+</a>
+
+<a href="https://apple-market.github.io/reviews" target="_blank"
+   style="background:#2ecc71;color:#000;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+   ⭐ Отзывы
+</a>
+
+</div>
+
+<div style="font-size:13px;color:#666;">
+© Apple Market 🍎 — Беларусь
+</div>
+
+</footer>
+
+<script>
+
+// раскрытие характеристик
+function toggleDetails(button){
+  const card = button.closest('.card');
+  const details = card.querySelector('.details');
+
+  if(details.style.display === 'block'){
+    details.style.display = 'none';
+    button.innerText = 'Подробнее';
+  } else {
+    details.style.display = 'block';
+    button.innerText = 'Скрыть';
+  }
+}
+
+
+// изменение цены при выборе памяти
+
+
+</script>
+
+</body>
+</html>
