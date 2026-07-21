@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AM BY — Каталог iPhone</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#0b0b0f;
+  color:#fff;
+  position:relative;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  top:-250px;
+  left:50%;
+  transform:translateX(-50%);
+  width:900px;
+  height:900px;
+  background:radial-gradient(circle, rgba(46,204,113,0.08), transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+body::after{
+  content:'';
+  position:fixed;
+  bottom:-300px;
+  right:-200px;
+  width:800px;
+  height:800px;
+  background:radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+header{
+  text-align:center;
+  padding:36px 20px 6px;
+  background:#000;
+  border-bottom:1px solid #111;
+}
+
+header h1{
+  font-size:32px;
+  margin:0;
+}
+
+header p{
+  color:#888;
+  margin-top:10px;
+}
+
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+
+.filter{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.filter button{
+  background:#111;
+  border:1px solid #222;
+  color:#fff;
+  padding:8px 14px;
+  margin:4px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.filter button:hover{
+  background:#2ecc71;
+  color:#000;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px;
+}
+
+
+.card{
+  background:#141419;
+  border:1px solid #1f1f26;
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.6);
+  transition:.3s ease;
+  position:relative;
+  z-index:1;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  border-radius:10px;
+}
+
+.title{
+  font-size:18px;
+  font-weight:600;
+  margin:12px 0;
+}
+
+.price{
+  font-size:20px;
+  font-weight:700;
+  color:#2ecc71;
+  margin:10px 0;
+}
+
+.actions{
+  margin-top:12px;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.order{
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+  display:inline-block;
+}
+
+.order.consult{
+  background:#fff;
+  color:#000;
+}
+
+.order.buy{
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:#fff;
+}
+
+.order:hover{
+  transform:scale(1.05);
+  opacity:.9;
+}
+
+.details{
+  display:none;
+  font-size:14px;
+  margin-top:10px;
+  text-align:left;
+  background:#0f0f0f;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #222;
+}
+
+.details.active{
+  display:block;
+}
+
+
+.show-btn{
+  margin-top:8px;
+  font-size:13px;
+  color:#2ecc71;
+  cursor:pointer;
+}
+
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#e74c3c;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  margin-top:50px;
+  border-top:1px solid #111;
+  color:#777;
+}
+
+@media(max-width:520px){
+  .card img{height:180px}
+  .trust-item{width:100%;}
+}
+}
+
+
+/* micro animations */
+@keyframes cardFadeUp{
+  from{opacity:0; transform:translateY(25px);} 
+  to{opacity:1; transform:translateY(0);} 
+}
+
+.card{
+  animation:cardFadeUp .6s ease forwards;
+}
+
+.card img{
+  transition:transform .35s ease;
+}
+
+.card:hover img{
+  transform:scale(1.05);
+}
+
+.order{
+  position:relative;
+  overflow:hidden;
+}
+
+.order.buy{
+  box-shadow:0 0 0 rgba(46,204,113,0.0);
+  transition:all .25s ease;
+}
+
+.order.buy:hover{
+  box-shadow:0 0 18px rgba(46,204,113,.6);
+  transform:translateY(-2px);
+}
+
+.order.consult:hover{
+  transform:translateY(-2px);
+}
+
+.show-btn{
+  transition:.25s ease;
+}
+
+.show-btn:hover{
+  color:#fff;
+  text-shadow:0 0 8px rgba(46,204,113,.8);
+}
+
+
+/* search bar */
+.search-box{
+  max-width:420px;
+  margin:2px auto 20px;
+}
+.search-box input{
+  width:100%;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #222;
+  background:#141419;
+  color:#fff;
+  font-size:14px;
+}
+
+/* scroll top button */
+#scrollTopBtn{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  background:#2ecc71;
+  color:#000;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  display:none;
+  z-index:999;
+}
+
+/* sticky bottom bar */
+.mobile-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#111;
+  border-top:1px solid #222;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  z-index:998;
+}
+
+.mobile-bar a{
+  color:#fff;
+  text-decoration:none;
+  font-size:13px;
+}
+
+@media(min-width:700px){
+  .mobile-bar{display:none;}
+}
+
+
+.notice{
+max-width:1200px;margin:20px auto;padding:16px 20px;
+background:linear-gradient(135deg,#1d3b22,#103317);
+border:1px solid #2ecc71;border-radius:14px;
+color:#fff;font-weight:600;line-height:1.5;
+box-shadow:0 10px 30px rgba(46,204,113,.15)}
+.old-price{text-decoration:line-through;color:#888;margin-right:8px;font-weight:500}
+.new-price{color:#2ecc71;font-weight:700}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AM BY 🍎</h1>
+  <p>Каталог новых iPhone 📱</p>
+</header>
+
+<div class="wrap">
+<div class="notice">
+⚠️ <b>Ваш ID еще не зарегистрирован в базе клиентов.</b><br>
+🎁 Для вас автоматически начислена <span style="color:#2ecc71;">скидка -15%</span> на первый заказ.</b><br>
+Цены ниже уже указаны с учетом персональной скидки 🔖
+</div>
+
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="🔍 Найти iPhone..." onkeyup="searchPhones()">
+</div>
+
+
+
+<div class="grid">
+
+<!-- 15 -->
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=300991&size=240x240">
+<div class="title">iPhone 15</div>
+<div class="variant">128 GB — <span class="old-price">1400 BYN</span><span class="new-price">1190 BYN</span></div>
+<div class="variant">256 GB — <span class="old-price">1550 BYN</span><span class="new-price">1318 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED<br>📸 48+12 Мп<br>🔋 3350 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=300993&size=240x240">
+<div class="title">iPhone 15 Pro</div>
+<div class="variant">128 GB — <span class="old-price">1600 BYN</span><span class="new-price">1360 BYN</span></div>
+<div class="variant">256 GB — <span class="old-price">1750 BYN</span><span class="new-price">1488 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" 120Hz<br>📸 48+12+12 Мп<br>🔋 3275 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301003&size=240x240">
+<div class="title">iPhone 15 Pro Max</div>
+<div class="variant">256 GB — <span class="old-price">2050 BYN</span><span class="new-price">1742 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">2200 BYN</span><span class="new-price">1870 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.7" 120Hz<br>📸 48+12+12 Мп<br>🔋 4440 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 16 -->
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301045&size=240x240">
+<div class="title">iPhone 16</div>
+<div class="variant">128 GB — <span class="old-price">1650 BYN</span><span class="new-price">1402 BYN</span></div>
+<div class="variant">256 GB — <span class="old-price">1800 BYN</span><span class="new-price">1530 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.1" OLED<br>📸 48+12 Мп<br>🔋 3560 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301047&size=240x240">
+<div class="title">iPhone 16 Pro</div>
+<div class="variant">256 GB — <span class="old-price">2000 BYN</span><span class="new-price">1700 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48+12 Мп<br>🔋 3580 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301048&size=240x240">
+<div class="title">iPhone 16 Pro Max</div>
+<div class="variant">256 GB — <span class="old-price">2200 BYN</span><span class="new-price">1870 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">2400 BYN</span><span class="new-price">2040 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.9" 120Hz<br>📸 48+48+12 Мп<br>🔋 4680 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<!-- 17 -->
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301247&size=240x240">
+<div class="title">iPhone 17</div>
+<div class="variant">256 GB — <span class="old-price">1980 BYN</span><span class="new-price">1683 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">2135 BYN</span><span class="new-price">1815 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48 Мп<br>🔋 3690 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301244&size=240x240">
+<div class="title">iPhone 17 Air</div>
+<div class="variant">256 GB — <span class="old-price">2480 BYN</span><span class="new-price">2108 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">2650 BYN</span><span class="new-price">2252 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.6" 120Hz<br>📸 48 Мп<br>🔋 3150 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301245&size=240x240">
+<div class="title">iPhone 17 Pro</div>
+<div class="variant">256 GB — <span class="old-price">2755 BYN</span><span class="new-price">2342 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">2980 BYN</span><span class="new-price">2533 BYN</span></div>
+<div class="variant">1 TB — <span class="old-price">3270 BYN</span><span class="new-price">2780 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.3" 120Hz<br>📸 48+48+48 Мп<br>🔋 4250 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+<div class="card">
+<img src="https://cdsassets.apple.com/content/services/pub/image?productid=301246&size=240x240">
+<div class="title">iPhone 17 Pro Max</div>
+<div class="variant">256 GB — <span class="old-price">2995 BYN</span><span class="new-price">2546 BYN</span></div>
+<div class="variant">512 GB — <span class="old-price">3235 BYN</span><span class="new-price">2750 BYN</span></div>
+<div class="variant">1 TB — <span class="old-price">3615 BYN</span><span class="new-price">3073 BYN</span></div>
+<div class="show-btn" onclick="toggleDetails(this)">Подробнее</div>
+<div class="details">📏 6.9" 120Hz<br>📸 48+48+48 Мп<br>🔋 5090 мАч</div>
+<div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank">Консультация</a><a class="order buy" href="https://t.me/manager_am_by" target="_blank">Купить</a></div>
+</div>
+
+</div>
+
+<footer>
+
+<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+
+<a href="https://t.me/+0_rGlgShhNpkNDZk" target="_blank"
+   style="background:#0088cc;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;">
+   ✈️ Telegram
+</a>
+
+<a href="https://t.me/manager_am_by" target="_blank"
+   style="background:#d62976;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;">
+   👩‍💻 Менеджер
+</a>
+
+<a href="https://apple-market.github.io/reviews" target="_blank"
+   style="background:#2ecc71;color:#000;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+   ⭐ Отзывы
+</a>
+
+</div>
+
+<div style="font-size:13px;color:#666;">
+© AM BY 🍎 2021-2026
+</div>
+
+</footer>
+
+<script>
+
+// раскрытие характеристик
+function toggleDetails(button){
+  const card = button.closest('.card');
+  const details = card.querySelector('.details');
+
+  if(details.style.display === 'block'){
+    details.style.display = 'none';
+    button.innerText = 'Подробнее';
+  } else {
+    details.style.display = 'block';
+    button.innerText = 'Скрыть';
+  }
+}
+
+
+// изменение цены при выборе памяти
+
+
+</script>
+
+
+
+<button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+<div class="mobile-bar">
+<a href="https://t.me/am_market_by" target="_blank">📩 Telegram</a>
+<a href="https://apple-market.github.io/reviews" target="_blank">⭐ Отзывы</a>
+<a href="https://www.instagram.com/am_market_by" target="_blank">📸 Instagram</a>
+</div>
+
+<script>
+function searchPhones(){
+  const input=document.getElementById('searchInput').value.toLowerCase();
+  const cards=document.querySelectorAll('.card');
+
+  cards.forEach(card=>{
+    const title=card.querySelector('.title').innerText.toLowerCase();
+    if(title.includes(input)){
+      card.style.display='block';
+    }else{
+      card.style.display='none';
+    }
+  });
+}
+
+const btn=document.getElementById('scrollTopBtn');
+
+window.onscroll=function(){
+  if(document.body.scrollTop>300 || document.documentElement.scrollTop>300){
+    btn.style.display='block';
+  }else{
+    btn.style.display='none';
+  }
+}
+
+function scrollToTop(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
