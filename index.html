@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="AM BY — каталог iPhone. Выберите модель, память и валюту, затем свяжитесь с менеджером в Telegram."/>
+<meta name="theme-color" content="#08090b"/>
+<title>AM BY — Каталог iPhone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090b;
+  --surface:#111318;
+  --surface-2:#17191f;
+  --line:#252832;
+  --text:#f7f7f8;
+  --muted:#969aa5;
+  --accent:#2ecc71;
+  --accent-2:#27ae60;
+  --danger:#ff5d5d;
+  --max:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-260px auto auto 50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(46,204,113,.075),transparent 68%);pointer-events:none;z-index:-1}
+a{color:inherit}
+button,input,select{font:inherit}
+.container{width:min(var(--max),calc(100% - 40px));margin:auto}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(8,9,11,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.header-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:20px;font-weight:800;text-decoration:none;letter-spacing:-.04em}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:24px;align-items:center}
+.nav a{text-decoration:none;color:#bfc2ca;font-size:14px;transition:.2s}
+.nav a:hover{color:#fff}
+.nav .nav-cta{padding:10px 15px;background:#fff;color:#000;border-radius:10px;font-weight:700}
+
+/* Hero */
+.hero{padding:82px 0 54px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:#cdd0d7;font-size:12px;font-weight:600}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(46,204,113,.75)}
+.hero h1{max-width:850px;margin:18px auto 14px;font-size:clamp(38px,6vw,70px);line-height:1.02;letter-spacing:-.055em}
+.hero h1 span{color:var(--accent)}
+.hero p{max-width:680px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.65}
+.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{border:0;border-radius:12px;padding:13px 20px;text-decoration:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--accent);color:#07100a;box-shadow:0 8px 28px rgba(46,204,113,.15)}
+.btn-secondary{background:#fff;color:#000}
+.btn-ghost{background:#15171c;color:#fff;border:1px solid var(--line)}
+
+/* Trust */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 58px}
+.trust-item{padding:18px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;text-align:left}
+.trust-icon{font-size:20px;margin-bottom:9px}
+.trust-title{font-size:14px;font-weight:700}
+.trust-text{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.45}
+
+/* Catalog controls */
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.section-kicker{color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+h2{font-size:32px;letter-spacing:-.04em;margin:5px 0 0}
+.catalog-count{color:var(--muted);font-size:13px}
+.controls{display:grid;grid-template-columns:minmax(220px,1fr) repeat(4,auto);gap:10px;margin-bottom:22px}
+.search-box{position:relative}
+.search-box input{width:100%;height:46px;padding:0 15px 0 42px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:#fff;outline:none}
+.search-box input:focus{border-color:rgba(46,204,113,.55);box-shadow:0 0 0 3px rgba(46,204,113,.08)}
+.search-icon{position:absolute;left:15px;top:13px;color:#7f838d}
+.filter-select{height:46px;padding:0 35px 0 13px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:#fff;outline:none;min-width:135px}
+.category-switch{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.category-pill{border:1px solid var(--line);background:var(--surface);color:#b9bdc8;padding:11px 18px;border-radius:999px;cursor:pointer;font-weight:700;transition:.2s ease}
+.category-pill:hover{border-color:#3a3e49;color:#fff}
+.category-pill.active{background:#fff;color:#090a0c;border-color:#fff;box-shadow:0 8px 24px rgba(255,255,255,.08)}
+.currency-note{margin:-12px 0 14px;color:#666a74;font-size:10px}.filter-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:25px}
+.pill{border:1px solid var(--line);background:#111318;color:#bfc2ca;border-radius:999px;padding:8px 12px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s}
+.pill.active,.pill:hover{background:#fff;color:#000;border-color:#fff}
+
+/* Product grid */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{background:linear-gradient(180deg,#15171d,#101216);border:1px solid var(--line);border-radius:18px;padding:14px;position:relative;overflow:hidden;animation:fadeUp .55s ease both;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-5px);border-color:#353944;box-shadow:0 22px 55px rgba(0,0,0,.32)}
+.card.hidden{display:none}
+.badge{position:absolute;top:12px;left:12px;background:#fff;color:#000;padding:6px 9px;border-radius:8px;font-size:10px;font-weight:800;z-index:2}
+.badge.green{background:var(--accent)}
+.product-image{height:250px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,255,255,.045),transparent 65%);border-radius:13px;margin-bottom:14px}
+.card img{width:100%;height:100%;object-fit:contain;transition:transform .35s ease}.used-placeholder{font-size:72px;opacity:.55}
+.card:hover img{transform:scale(1.045)}
+.title{font-size:19px;font-weight:800;letter-spacing:-.025em;margin-bottom:12px}
+.meta-row{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#aeb2bc;font-size:12px;margin-bottom:12px}
+.availability{color:#75e7a2;font-weight:600}
+.memory-label{font-size:11px;color:#7f838d;margin-bottom:7px}
+.memory{display:flex;gap:6px;flex-wrap:wrap}
+.memory button{border:1px solid var(--line);background:#0d0f13;color:#d9dbe0;padding:7px 9px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s}
+.memory button.active,.memory button:hover{border-color:var(--accent);color:var(--accent);background:rgba(46,204,113,.06)}
+.price-row{display:flex;align-items:baseline;gap:8px;margin:15px 0 5px}
+.new-price{color:#f7f7f8;font-size:22px;font-weight:800;letter-spacing:-.035em}.discount-price{display:none}
+.saving{font-size:11px;color:#aeb2bc;margin-bottom:13px}
+.details{display:none;margin-top:12px;padding:11px;border:1px solid var(--line);border-radius:10px;background:#0b0d10;color:#bfc2ca;font-size:12px;line-height:1.75}
+.details.active{display:block}
+.show-btn{border:0;background:none;color:var(--accent);padding:0;cursor:pointer;font-size:12px;font-weight:700}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.order{min-height:40px;border-radius:10px;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;transition:.2s}
+.order.consult{background:#fff;color:#000}
+.order.buy{background:var(--accent);color:#07100a}
+.order:hover{transform:translateY(-2px)}
+.no-results{display:none;text-align:center;padding:60px 20px;border:1px dashed var(--line);border-radius:16px;color:var(--muted)}
+.no-results.active{display:block}
+
+/* Sections */
+.info-section{padding:92px 0 0}
+.center-head{text-align:center;max-width:680px;margin:0 auto 32px}
+.center-head p{color:var(--muted);line-height:1.6}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.benefit{padding:23px;background:#111318;border:1px solid var(--line);border-radius:16px}
+.benefit .icon{font-size:25px}
+.benefit h3{font-size:15px;margin:15px 0 7px}
+.benefit p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.review{padding:22px;background:#111318;border:1px solid var(--line);border-radius:16px}
+.stars{color:#ffd45a;letter-spacing:2px;font-size:13px}
+.review-text{font-size:14px;line-height:1.65;color:#e5e6ea;margin:14px 0 18px}
+.reviewer{display:flex;align-items:center;gap:10px}
+.avatar{width:34px;height:34px;border-radius:50%;background:#242730;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.reviewer strong{font-size:12px}.reviewer small{display:block;color:#777b85;margin-top:2px;font-size:10px}
+.review-more{text-align:center;margin-top:20px}
+
+.cta{margin:90px 0 25px;padding:45px 35px;text-align:center;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 50% 0,rgba(46,204,113,.12),transparent 55%),#101216}
+.cta h2{margin:0 0 10px}.cta p{color:var(--muted);margin:0 auto 22px;max-width:580px;line-height:1.6}
+
+footer{padding:40px 0 100px;border-top:1px solid #181a20;margin-top:45px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer-links{display:flex;gap:9px;flex-wrap:wrap}
+.footer-links a{padding:10px 13px;border-radius:9px;text-decoration:none;background:#15171c;border:1px solid var(--line);font-size:12px;font-weight:700}
+.footer-links a:hover{border-color:#3b3e48}
+.copyright{color:#666a74;font-size:11px}
+
+/* Floating / mobile */
+#scrollTopBtn{position:fixed;right:18px;bottom:82px;width:43px;height:43px;border:1px solid #32353d;background:#fff;color:#000;border-radius:12px;font-size:20px;font-weight:800;cursor:pointer;display:none;z-index:80;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#scrollTopBtn.show{display:block}
+.mobile-bar{display:none}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}.controls{grid-template-columns:1fr 1fr}.search-box{grid-column:1/-1}.benefits,.trust{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.nav{display:none}.header-inner{height:62px}.hero{padding:55px 0 38px}.hero h1{font-size:43px}.hero p{font-size:14px}.container{width:min(var(--max),calc(100% - 28px))}.trust{grid-template-columns:1fr 1fr;margin-bottom:45px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.product-image{height:200px}.card{padding:11px;border-radius:15px}.actions{grid-template-columns:1fr}.actions .consult{display:none}.section-head{align-items:start;flex-direction:column}.reviews{grid-template-columns:1fr}.benefits{grid-template-columns:1fr 1fr}.footer-inner{flex-direction:column;text-align:center}.mobile-bar{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);bottom:0;left:0;right:0;height:62px;background:rgba(13,14,18,.96);backdrop-filter:blur(15px);border-top:1px solid #292c34;z-index:70;padding-bottom:env(safe-area-inset-bottom)}.mobile-bar a{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;text-decoration:none;font-size:10px;color:#aeb2bc}.mobile-bar a:first-child{color:#fff}.mobile-bar b{font-size:18px;line-height:1}.cta{margin-top:60px;padding:32px 18px}}
+@media(max-width:480px){.trust{gap:8px}.trust-item{padding:13px}.trust-title{font-size:12px}.trust-text{font-size:10px}.grid{grid-template-columns:1fr 1fr}.product-image{height:175px}.title{font-size:16px}.new-price{font-size:19px}.old-price{display:none}.memory button{padding:6px 7px}.controls{grid-template-columns:1fr}.filter-select{width:100%}.benefits{grid-template-columns:1fr}.hero-actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="#top">AM <span>BY</span> 🍎</a>
+    <nav class="nav">
+      <a href="#catalog">Каталог</a>
+      <a href="#reviews">Отзывы</a>
+      <a class="nav-cta" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Менеджер</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      
+      <h1>Выберите свой <span>iPhone</span></h1>
+      <p>Актуальный каталог моделей и памяти. Выберите вариант ниже — менеджер поможет с покупкой и ответит на вопросы в Telegram.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#catalog">📱 Смотреть каталог</a>
+        <a class="btn btn-secondary" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">💬 Написать менеджеру</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+
+    <section id="catalog">
+      <div class="section-head">
+        <div><div class="section-kicker">Каталог</div><h2>iPhone</h2></div>
+        <div class="catalog-count" id="catalogCount">24 модели</div>
+      </div>
+
+      <div class="controls">
+        <div class="search-box"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Найти iPhone..." autocomplete="off"></div>
+        <select class="filter-select" id="typeFilter" aria-label="Фильтр по типу">
+          <option value="all">Все модели</option><option value="base">Обычные</option><option value="pro">Pro</option><option value="promax">Pro Max</option><option value="air">Air</option>
+        </select>
+        <select class="filter-select" id="storageFilter" aria-label="Фильтр по памяти">
+          <option value="all">Любая память</option><option value="128">128 GB</option><option value="256">256 GB</option><option value="512">512 GB</option><option value="1024">1 TB</option>
+        </select>
+        <select class="filter-select" id="sortFilter" aria-label="Сортировка">
+          <option value="default">По умолчанию</option><option value="priceAsc">Сначала дешевле</option><option value="priceDesc">Сначала дороже</option>
+        </select>
+        <select class="filter-select currency-select" id="currencyFilter" aria-label="Валюта">
+          <option value="BYN">Br BYN</option>
+          <option value="RUB">₽ RUB</option>
+          <option value="EUR">€ EUR</option>
+        </select>
+      </div>
+      
+
+      <div class="category-switch" id="conditionPills" aria-label="Категория товаров">
+        <button class="category-pill active" data-condition="all">Все</button>
+        <button class="category-pill" data-condition="new">📦 Новые</button>
+        <button class="category-pill" data-condition="used">♻️ Б/У</button>
+      </div>
+
+      <div class="filter-pills" id="generationPills">
+        <button class="pill active" data-generation="all">Все</button>
+        <button class="pill" data-generation="13">13 серия</button>
+        <button class="pill" data-generation="14">14 серия</button>
+        <button class="pill" data-generation="15">15 серия</button>
+        <button class="pill" data-generation="16">16 серия</button>
+        <button class="pill" data-generation="17">17 серия</button>
+      </div>
+
+      <div class="grid" id="productGrid">
+        <article class="card" data-condition="new" data-model="iPhone 15" data-generation="15" data-type="base" data-storages="128,256" data-price="1190" data-original-price="1190">
+          <div class="badge green">ХИТ</div><div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=300991&size=240x240" alt="iPhone 15"></div>
+          <div class="title">iPhone 15</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1400" data-price="1190" data-original-price="1190">128 GB</button><button data-storage="256" data-old="1550" data-price="1318" data-original-price="1318">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1400 BYN</span><span class="discount-price">1190 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.1″ OLED<br>📸 48+12 Мп<br>🔋 3350 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 15 Pro" data-generation="15" data-type="pro" data-storages="128,256" data-price="1360" data-original-price="1360">
+          <div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=300993&size=240x240" alt="iPhone 15 Pro"></div>
+          <div class="title">iPhone 15 Pro</div><div class="meta-row"><span>6.1″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1600" data-price="1360" data-original-price="1360">128 GB</button><button data-storage="256" data-old="1750" data-price="1488" data-original-price="1488">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1600 BYN</span><span class="discount-price">1360 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.1″ 120Hz<br>📸 48+12+12 Мп<br>🔋 3275 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 15 Pro Max" data-generation="15" data-type="promax" data-storages="256,512" data-price="1742" data-original-price="1742">
+          <div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301003&size=240x240" alt="iPhone 15 Pro Max"></div>
+          <div class="title">iPhone 15 Pro Max</div><div class="meta-row"><span>6.7″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2050" data-price="1742" data-original-price="1742">256 GB</button><button data-storage="512" data-old="2200" data-price="1870" data-original-price="1870">512 GB</button></div>
+          <div class="price-row"><span class="new-price">2050 BYN</span><span class="discount-price">1742 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.7″ 120Hz<br>📸 48+12+12 Мп<br>🔋 4440 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 16" data-generation="16" data-type="base" data-storages="128,256" data-price="1402" data-original-price="1402">
+          <div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301045&size=240x240" alt="iPhone 16"></div>
+          <div class="title">iPhone 16</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1650" data-price="1402" data-original-price="1402">128 GB</button><button data-storage="256" data-old="1800" data-price="1530" data-original-price="1530">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1650 BYN</span><span class="discount-price">1402 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.1″ OLED<br>📸 48+12 Мп<br>🔋 3560 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 16 Pro" data-generation="16" data-type="pro" data-storages="256" data-price="1700" data-original-price="1700">
+          <div class="badge">PRO</div><div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301047&size=240x240" alt="iPhone 16 Pro"></div>
+          <div class="title">iPhone 16 Pro</div><div class="meta-row"><span>6.3″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2000" data-price="1700" data-original-price="1700">256 GB</button></div>
+          <div class="price-row"><span class="new-price">2000 BYN</span><span class="discount-price">1700 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.3″ 120Hz<br>📸 48+48+12 Мп<br>🔋 3580 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 16 Pro Max" data-generation="16" data-type="promax" data-storages="256,512" data-price="1870" data-original-price="1870">
+          <div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301048&size=240x240" alt="iPhone 16 Pro Max"></div>
+          <div class="title">iPhone 16 Pro Max</div><div class="meta-row"><span>6.9″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2200" data-price="1870" data-original-price="1870">256 GB</button><button data-storage="512" data-old="2400" data-price="2040" data-original-price="2040">512 GB</button></div>
+          <div class="price-row"><span class="new-price">2200 BYN</span><span class="discount-price">1870 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.9″ 120Hz<br>📸 48+48+12 Мп<br>🔋 4680 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 17" data-generation="17" data-type="base" data-storages="256,512" data-price="1683" data-original-price="1683">
+          <div class="badge green">НОВИНКА</div><div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301247&size=240x240" alt="iPhone 17"></div>
+          <div class="title">iPhone 17</div><div class="meta-row"><span>6.3″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="1980" data-price="1683" data-original-price="1683">256 GB</button><button data-storage="512" data-old="2135" data-price="1815" data-original-price="1815">512 GB</button></div>
+          <div class="price-row"><span class="new-price">1980 BYN</span><span class="discount-price">1683 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.3″ 120Hz<br>📸 48+48 Мп<br>🔋 3690 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 17 Air" data-generation="17" data-type="air" data-storages="256,512" data-price="2108" data-original-price="2108">
+          <div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301244&size=240x240" alt="iPhone 17 Air"></div>
+          <div class="title">iPhone 17 Air</div><div class="meta-row"><span>6.6″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2480" data-price="2108" data-original-price="2108">256 GB</button><button data-storage="512" data-old="2650" data-price="2252" data-original-price="2252">512 GB</button></div>
+          <div class="price-row"><span class="new-price">2480 BYN</span><span class="discount-price">2108 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.6″ 120Hz<br>📸 48 Мп<br>🔋 3150 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 17 Pro" data-generation="17" data-type="pro" data-storages="256,512,1024" data-price="2342" data-original-price="2342">
+          <div class="badge">PRO</div><div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301245&size=240x240" alt="iPhone 17 Pro"></div>
+          <div class="title">iPhone 17 Pro</div><div class="meta-row"><span>6.3″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2755" data-price="2342" data-original-price="2342">256 GB</button><button data-storage="512" data-old="2980" data-price="2533" data-original-price="2533">512 GB</button><button data-storage="1024" data-old="3270" data-price="2780" data-original-price="2780">1 TB</button></div>
+          <div class="price-row"><span class="new-price">2755 BYN</span><span class="discount-price">2342 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.3″ 120Hz<br>📸 48+48+48 Мп<br>🔋 4250 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="new" data-model="iPhone 17 Pro Max" data-generation="17" data-type="promax" data-storages="256,512,1024" data-price="2546" data-original-price="2546">
+          <div class="badge green">ХИТ</div><div class="product-image"><img loading="lazy" src="https://cdsassets.apple.com/content/services/pub/image?productid=301246&size=240x240" alt="iPhone 17 Pro Max"></div>
+          <div class="title">iPhone 17 Pro Max</div><div class="meta-row"><span>6.9″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2995" data-price="2546" data-original-price="2546">256 GB</button><button data-storage="512" data-old="3235" data-price="2750" data-original-price="2750">512 GB</button><button data-storage="1024" data-old="3615" data-price="3073" data-original-price="3073">1 TB</button></div>
+          <div class="price-row"><span class="new-price">2995 BYN</span><span class="discount-price">2546 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">📏 6.9″ 120Hz<br>📸 48+48+48 Мп<br>🔋 5090 мАч</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+
+        <article class="card" data-condition="used" data-model="iPhone 13" data-generation="13" data-type="base" data-storages="128,256" data-price="530">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 13</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="530" data-price="530">128 GB</button><button data-storage="256" data-old="675" data-price="675">256 GB</button></div>
+          <div class="price-row"><span class="new-price">530 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 13 Pro" data-generation="13" data-type="pro" data-storages="128,256" data-price="675">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 13 Pro</div><div class="meta-row"><span>6.1″ · Pro</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="675" data-price="675">128 GB</button><button data-storage="256" data-old="800" data-price="800">256 GB</button></div>
+          <div class="price-row"><span class="new-price">675 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 13 Pro Max" data-generation="13" data-type="promax" data-storages="128,256" data-price="855">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 13 Pro Max</div><div class="meta-row"><span>6.7″ · Pro Max</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="855" data-price="855">128 GB</button><button data-storage="256" data-old="990" data-price="990">256 GB</button></div>
+          <div class="price-row"><span class="new-price">855 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 14" data-generation="14" data-type="base" data-storages="128,256" data-price="660">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 14</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="660" data-price="660">128 GB</button><button data-storage="256" data-old="810" data-price="810">256 GB</button></div>
+          <div class="price-row"><span class="new-price">660 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 14 Pro" data-generation="14" data-type="pro" data-storages="128,256,512" data-price="855">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 14 Pro</div><div class="meta-row"><span>6.1″ · Pro</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="855" data-price="855">128 GB</button><button data-storage="256" data-old="1015" data-price="1015">256 GB</button><button data-storage="512" data-old="1180" data-price="1180">512 GB</button></div>
+          <div class="price-row"><span class="new-price">855 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 14 Pro Max" data-generation="14" data-type="promax" data-storages="128,256" data-price="1080">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 14 Pro Max</div><div class="meta-row"><span>6.7″ · Pro Max</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1080" data-price="1080">128 GB</button><button data-storage="256" data-old="1220" data-price="1220">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1080 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 15" data-generation="15" data-type="base" data-storages="128" data-price="945">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 15</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="945" data-price="945">128 GB</button></div>
+          <div class="price-row"><span class="new-price">945 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 15 Pro" data-generation="15" data-type="pro" data-storages="128" data-price="1170">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 15 Pro</div><div class="meta-row"><span>6.1″ · Pro</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1170" data-price="1170">128 GB</button></div>
+          <div class="price-row"><span class="new-price">1170 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 15 Pro Max" data-generation="15" data-type="promax" data-storages="256,512" data-price="1355">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 15 Pro Max</div><div class="meta-row"><span>6.7″ · Pro Max</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="1355" data-price="1355">256 GB</button><button data-storage="512" data-old="1510" data-price="1510">512 GB</button></div>
+          <div class="price-row"><span class="new-price">1355 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 16" data-generation="16" data-type="base" data-storages="128,256" data-price="1170">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 16</div><div class="meta-row"><span>6.1″ OLED</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1170" data-price="1170">128 GB</button><button data-storage="256" data-old="1350" data-price="1350">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1170 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 16 Pro" data-generation="16" data-type="pro" data-storages="128,256" data-price="1250">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 16 Pro</div><div class="meta-row"><span>6.3″ · Pro</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="128" data-old="1250" data-price="1250">128 GB</button><button data-storage="256" data-old="1405" data-price="1405">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1250 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 16 Pro Max" data-generation="16" data-type="promax" data-storages="256,512" data-price="1620">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 16 Pro Max</div><div class="meta-row"><span>6.9″ · Pro Max</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="1620" data-price="1620">256 GB</button><button data-storage="512" data-old="1770" data-price="1770">512 GB</button></div>
+          <div class="price-row"><span class="new-price">1620 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 17" data-generation="17" data-type="base" data-storages="256" data-price="1435">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 17</div><div class="meta-row"><span>6.3″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="1435" data-price="1435">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1435 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 17 Air" data-generation="17" data-type="air" data-storages="256" data-price="1680">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 17 Air</div><div class="meta-row"><span>6.6″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="1680" data-price="1680">256 GB</button></div>
+          <div class="price-row"><span class="new-price">1680 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 17 Pro" data-generation="17" data-type="pro" data-storages="256" data-price="2085">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 17 Pro</div><div class="meta-row"><span>6.3″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2085" data-price="2085">256 GB</button></div>
+          <div class="price-row"><span class="new-price">2085 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+        <article class="card" data-condition="used" data-model="iPhone 17 Pro Max" data-generation="17" data-type="promax" data-storages="256,512" data-price="2240">
+          <div class="badge">Б/У</div><div class="product-image"><div class="used-placeholder">🍎</div></div>
+          <div class="title">iPhone 17 Pro Max</div><div class="meta-row"><span>6.9″ · 120 Hz</span><span class="availability">● В наличии</span></div>
+          <div class="memory-label">Память</div><div class="memory"><button class="active" data-storage="256" data-old="2240" data-price="2240">256 GB</button><button data-storage="512" data-old="2470" data-price="2470">512 GB</button></div>
+          <div class="price-row"><span class="new-price">2240 BYN</span></div>
+          <button class="show-btn" type="button" onclick="toggleDetails(this)">Подробнее</button><div class="details">♻️ Б/У устройство<br>📦 Комплектацию уточняйте у менеджера</div>
+          <div class="actions"><a class="order consult" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">Консультация</a><a class="order buy telegram-link" href="#">Купить</a></div>
+        </article>
+      </div>
+      <div class="no-results" id="noResults">Ничего не найдено.<br>Попробуйте изменить поиск или фильтры.</div>
+    </section>
+
+    <section class="info-section" id="reviews">
+      <div class="center-head"><div class="section-kicker">Отзывы</div><h2>Что говорят клиенты</h2><p>Ниже — отзыв из клиентского материала AM BY. Больше отзывов доступно на отдельной странице.</p></div>
+      <div class="reviews">
+        <article class="review"><div class="stars">★★★★★</div><div class="review-text">«17 айфон отвечает заявленным характеристикам. Состояние оригинал с пломбами. Сервис на уровне, спасибо за возможность приобрести такую модель по приятной цене 👍🏻»</div><div class="reviewer"><div class="avatar">М</div><div><strong>Максим</strong><small>Покупатель AM BY</small></div></div></article>
+        <article class="review"><div class="stars">★★★★★</div><div class="review-text">Хотите посмотреть больше реальных отзывов, фотографии и опыт покупателей?</div><div class="review-more"><a class="btn btn-ghost" href="https://apple-market.github.io/reviews" target="_blank" rel="noopener noreferrer">⭐ Смотреть все отзывы</a></div></article>
+        <article class="review"><div class="stars">★★★★★</div><div class="review-text">«Покупала здесь iPhone 15. Всё понравилось. Продавцы очень внимательные, рассказали всё про модель. Искала компании по всему городу, где сколько стоит, и остановилась на этой. И не пожалела!»</div><div class="reviewer"><div class="avatar">В</div><div><strong>Вика Г.</strong><small>Покупатель AM BY</small></div></div></article>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Не знаете, какой iPhone выбрать?</h2>
+      <p>Напишите менеджеру. Укажите бюджет, желаемую модель или память — поможем подобрать подходящий вариант.</p>
+      <a class="btn btn-primary" href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">💬 Получить консультацию</a>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://t.me/+0_rGlgShhNpkNDZk" target="_blank" rel="noopener noreferrer">✈️ Telegram</a>
+      <a href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer">👩‍💻 Менеджер</a>
+      <a href="https://apple-market.github.io/reviews" target="_blank" rel="noopener noreferrer">⭐ Отзывы</a>
+    </div>
+    <div class="copyright">© AM BY 🍎 2021–2026</div>
+  </div>
+</footer>
+
+<button id="scrollTopBtn" type="button" aria-label="Наверх">↑</button>
+<nav class="mobile-bar" aria-label="Мобильная навигация">
+  <a href="#catalog"><b>⌕</b>Каталог</a>
+  <a href="#reviews"><b>★</b>Отзывы</a>
+  <a href="https://t.me/manager_am_by" target="_blank" rel="noopener noreferrer"><b>✈</b>Менеджер</a>
+</nav>
+
+<script>
+const cards=[...document.querySelectorAll('.card')];
+const searchInput=document.getElementById('searchInput');
+const typeFilter=document.getElementById('typeFilter');
+const storageFilter=document.getElementById('storageFilter');
+const sortFilter=document.getElementById('sortFilter');
+const currencyFilter=document.getElementById('currencyFilter');
+const pills=[...document.querySelectorAll('.pill')];
+const conditionPills=[...document.querySelectorAll('.category-pill')];
+let condition='all';
+let currency='BYN';
+const FX = { BYN: 1, RUB: 28.0510, EUR: 28.0510 / 98.2897 };
+const CURRENCY = {
+  BYN: {symbol:'Br', code:'BYN', decimals:0},
+  RUB: {symbol:'₽', code:'RUB', decimals:0},
+  EUR: {symbol:'€', code:'EUR', decimals:0}
+};
+function formatPrice(byn){
+  const value = byn * FX[currency];
+  const rounded = Math.round(value);
+  return new Intl.NumberFormat('ru-RU').format(rounded) + ' ' + CURRENCY[currency].symbol;
+} 
+function priceValue(byn){ return byn * FX[currency]; }
+const grid=document.getElementById('productGrid');
+const noResults=document.getElementById('noResults');
+const catalogCount=document.getElementById('catalogCount');
+let generation='all';
+
+function updateCardPrice(card,button){
+  card.querySelectorAll('.memory button').forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  const old=Number(button.dataset.old);
+  const price=Number(button.dataset.price);
+  card.querySelector('.new-price').textContent=formatPrice(old);
+  card.dataset.price=old;
+  const storage=button.dataset.storage;
+  card.querySelectorAll('.telegram-link').forEach(link=>{
+    const model=card.dataset.model;
+    link.href='https://t.me/manager_am_by?text='+encodeURIComponent('Здравствуйте! Хочу купить '+model+' '+(storage==='1024'?'1 TB':storage+' GB')+'. Подскажите, пожалуйста, по наличию и оформлению.');
+  });
+}
+
+document.querySelectorAll('.memory button').forEach(button=>{
+  button.addEventListener('click',()=>updateCardPrice(button.closest('.card'),button));
+});
+
+function toggleDetails(button){
+  const card=button.closest('.card');
+  const details=card.querySelector('.details');
+  details.classList.toggle('active');
+  button.textContent=details.classList.contains('active')?'Скрыть':'Подробнее';
+}
+
+function matches(card){
+  const query=searchInput.value.trim().toLowerCase();
+  const model=card.dataset.model.toLowerCase();
+  const type=card.dataset.type;
+  const storages=card.dataset.storages.split(',');
+  const cardCondition=card.dataset.condition || 'new';
+  return (!query || model.includes(query)) &&
+         (condition==='all' || cardCondition===condition) &&
+         (typeFilter.value==='all' || type===typeFilter.value) &&
+         (storageFilter.value==='all' || storages.includes(storageFilter.value)) &&
+         (generation==='all' || card.dataset.generation===generation);
+}
+
+function applyFilters(){
+  const visible=cards.filter(matches);
+  const sorted=[...cards].sort((a,b)=>{
+    if(sortFilter.value==='priceAsc') return Number(a.querySelector('.memory button.active')?.dataset.old || a.dataset.price)-Number(b.querySelector('.memory button.active')?.dataset.old || b.dataset.price);
+    if(sortFilter.value==='priceDesc') return Number(b.querySelector('.memory button.active')?.dataset.old || b.dataset.price)-Number(a.querySelector('.memory button.active')?.dataset.old || a.dataset.price);
+    return cards.indexOf(a)-cards.indexOf(b);
+  });
+  sorted.forEach(card=>grid.appendChild(card));
+  cards.forEach(card=>card.classList.toggle('hidden',!matches(card)));
+  noResults.classList.toggle('active',visible.length===0);
+  catalogCount.textContent=visible.length+' '+(visible.length===1?'модель':visible.length<5?'модели':'моделей');
+}
+
+[searchInput,typeFilter,storageFilter,sortFilter].forEach(el=>el.addEventListener('input',applyFilters));
+currencyFilter.addEventListener('change',()=>{
+  currency=currencyFilter.value;
+  document.querySelectorAll('.card').forEach(card=>{
+    const active=card.querySelector('.memory button.active') || card.querySelector('.memory button');
+    if(active) updateCardPrice(card,active);
+  });
+  applyFilters();
+});
+conditionPills.forEach(pill=>pill.addEventListener('click',()=>{
+  conditionPills.forEach(p=>p.classList.remove('active'));
+  pill.classList.add('active');
+  condition=pill.dataset.condition;
+  applyFilters();
+}));
+
+pills.forEach(pill=>pill.addEventListener('click',()=>{
+  pills.forEach(p=>p.classList.remove('active'));pill.classList.add('active');generation=pill.dataset.generation;applyFilters();
+}));
+
+document.querySelectorAll('.card').forEach(card=>{
+  const first=card.querySelector('.memory button.active') || card.querySelector('.memory button');
+  if(first) updateCardPrice(card,first);
+});
+
+const scrollBtn=document.getElementById('scrollTopBtn');
+window.addEventListener('scroll',()=>scrollBtn.classList.toggle('show',window.scrollY>450),{passive:true});
+scrollBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+applyFilters();
+</script>
+</body>
+</html>
